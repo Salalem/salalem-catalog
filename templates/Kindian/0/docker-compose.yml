@@ -1,0 +1,84 @@
+version: "3.3"
+
+#### Services ####
+
+services:
+
+## Database ##
+
+  database:
+    build: ../database/.
+    image: "kindian-database:latest"
+    hostname: kindian-local-database
+    container_name: database
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "FUCKYOUKD"
+      DB_USER: "admin"
+      DB_PASSWORD: "QWEqwe!1"
+      DB_HOSTNAME: "database"
+      DB_PORT: "3306"
+
+## Frontend ##
+
+  frontend:
+    build: ../frontend/.
+    image: "kindian-frontend:latest"
+    hostname: kindian-local-frontend
+    restart: always
+    # volumes:
+    #   - ./frontend/:/workspace:rw
+    links:
+      - backend
+    environment:
+      BUILD_PROFILE: "production"
+      REACT_APP_URLs: "'http://localhost:8882'"
+    labels:
+      - "traefik.port=3000"
+      - "traefik.frontend.rule=Host:kindian.docker.localhost"
+
+## Backend API ##
+
+  backend:
+    build: ../backend
+    image: "kindian-backend:latest"
+    hostname: kindian-local-backend
+    restart: always
+    links:
+      - database
+    depends_on:
+      - database
+    environment:
+      BUILD_PROFILE: "production"
+      BACKEND_API: 'kindian-api.salalem.com'
+      QB_DB_NAME: "salalem_assessment_tool"
+      QB_DB_USER: "admin"
+      QB_DB_PASSWORD: "QWEqwe!1"
+      QB_DB_HOSTNAME: "database"
+      QB_DB_PORT: "3306"
+      CMS_DB_NAME: "salalem_content_management"
+      CMS_DB_USER: "admin"
+      CMS_DB_PASSWORD: "QWEqwe!1"
+      CMS_DB_HOSTNAME: "database"
+      CMS_DB_PORT: "3306"
+      GUNICORN_WORKERS: 3
+    labels:
+      - "traefik.port=8000"
+      - "traefik.frontend.rule=Host:kindian.api.docker.localhost"
+
+## Traefik Proxy ##
+
+  proxy:
+    command: '--web --docker --docker.domain=docker.localhost --logLevel=DEBUG'
+    hostname: traefik-proxy
+    container_name: proxy
+    image: 'traefik:cancoillotte-alpine'
+    # links:
+    #   - frontend
+    ports:
+      - '80:80'
+      - '8080:8080'
+    restart: always
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/dev/null:/traefik.toml'
