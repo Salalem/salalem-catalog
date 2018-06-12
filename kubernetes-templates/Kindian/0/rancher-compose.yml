@@ -1,7 +1,0 @@
-.catalog:
-  name: Kindian
-  version: v0.1
-  description: Description of the versioned template of the Catalog Entry
-  uuid: Kindian-0
-  minimum_rancher_version: 0.1
-  questions: #Used to request user input for configuration options

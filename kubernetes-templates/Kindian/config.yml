@@ -1,8 +1,0 @@
-name: Kindian # Name of the Catalog Entry
-description: |
-  # Description of the Catalog Entry
-version: v0.1
-category: CMS
-maintainer: GK
-license: Some License
-projectURL: https://google.com
