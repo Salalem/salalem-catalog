@@ -1,0 +1,8 @@
+name: Honeywell2mqtt
+description: |
+  For use with a software defined radio tuned that is tuned listen for Honeywell RF security sensors and send recvied data to MQTT
+version: "1.0.1"
+category: Automation
+maintainer: Chris Kacerguis
+license: MIT
+projectURL: http://cowdog.io

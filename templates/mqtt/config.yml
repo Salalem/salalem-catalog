@@ -1,0 +1,6 @@
+name: MQTT
+description: |
+  A Docker image with a simple MQTT Server
+version: "3.6"
+category: IoT
+projectURL: https://mosquitto.org

@@ -1,0 +1,13 @@
+version: '2'
+services:
+  appdaemon:
+    image: acockburn/appdaemon:latest
+    stdin_open: true
+    network_mode: host
+    volumes:
+    - /opt/appdaemon:/config
+    tty: true
+    ports:
+    - 5050:5050/tcp
+    labels:
+      io.rancher.container.pull_image: always

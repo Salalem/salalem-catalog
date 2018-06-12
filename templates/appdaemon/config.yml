@@ -1,0 +1,6 @@
+name: HADashboard
+description: |
+  HADashboard is a dashboard for Home Assistant that is intended to be wall mounted, and is optimized for distance viewing.
+version: "2.0.0"
+category: Automation
+projectURL: http://appdaemon.readthedocs.io/en/latest/DASHBOARD/

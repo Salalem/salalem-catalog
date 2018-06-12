@@ -1,0 +1,16 @@
+version: '2'
+services:
+  home-assistant:
+    image: homeassistant/home-assistant:0.51.2
+    privileged: true
+    stdin_open: true
+    network_mode: host
+    volumes:
+    - /opt/homeassistant:/config
+    - /etc/localtime:/etc/localtime:ro
+    - /dev/bus/usb:/dev/bus/usb
+    tty: true
+    ports:
+    - 8123:8123/tcp
+    labels:
+      io.rancher.container.pull_image: always

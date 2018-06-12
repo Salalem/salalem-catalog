@@ -1,0 +1,12 @@
+version: '2'
+services:
+  honeywell2mqtt:
+    privileged: true
+    image: chriskacerguis/honeywell2mqtt:1.0.1
+    stdin_open: true
+    network_mode: host
+    volumes:
+    - /dev/bus/usb:/dev/bus/usb
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always

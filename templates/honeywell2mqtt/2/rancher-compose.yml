@@ -1,0 +1,9 @@
+version: '2'
+catalog:
+  name: "Honeywell2mqtt"
+  version: "1.0.0"
+  description: "For use with a software defined radio tuned that is tuned listen for Honeywell RF security sensors"
+services:
+  honeywell2mqtt:
+    scale: 1
+    start_on_create: true
